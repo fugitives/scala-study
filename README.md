@@ -14,12 +14,12 @@
 |    7    | 내장 제어 구문                      | :white_check_mark: |
 |    8    | 함수와 클로저                       | :white_check_mark: |
 |    9    | 흐름 제어 추상화                    | :white_check_mark: |
-|    10   | 상속과 구성                       |      |
-|    11   | 스칼라의 계층구조                   |      |
-|    12   | 트레이트                          |      |
-|    13   | 패키지와 임포트                    |      |
-|    14   | 단언문과 테스트                    |      |
-|    15   | 케이스 클래스와 패턴 매치            |      |
+|    10   | 상속과 구성                       | :white_check_mark: |
+|    11   | 스칼라의 계층구조                   | :white_check_mark: |
+|    12   | 트레이트                          | :white_check_mark: |
+|    13   | 패키지와 임포트                    | :white_check_mark: |
+|    14   | 단언문과 테스트                    | :white_check_mark: |
+|    15   | 케이스 클래스와 패턴 매치            | :white_check_mark: |
 |    16   | 리스트                           |      |
 |    17   | 컬렉션                           |      |
 |    18   | 변경 가능한 객체                   |      |
