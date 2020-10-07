@@ -42,7 +42,7 @@
 * Set -> HashSet, Map -> HashMap // mutable
 
 * Set1 ... Set4 ... HashSet // immutable 
-* Map1 ... Set4 ... HashMap // immutable 
+* Map1 ... Map4 ... HashMap // immutable 
 
 ### Sorted Set and Map
 * SortedSet, SortedMap trait
