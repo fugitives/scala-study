@@ -28,7 +28,7 @@
 * xs.reverse.head == xs.last
 
 ### drop, take, splitAt
-* `drop` 과 `take` 는 접미사와 접두사를 반환
+* `drop` 과 `take` 는 suffix 와 prefix 를 반환
 * xs `take` n 에서 n >= xs.length 라면 xs 반환
 * xs `drop` n 에서 n >= xs.length 라면 Nil 반환
 * xs `splitAt` n == (xs `take` n, xs `drop` n)

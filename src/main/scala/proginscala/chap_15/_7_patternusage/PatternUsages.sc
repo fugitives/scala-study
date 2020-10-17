@@ -1,4 +1,4 @@
-import proginscala.chap_15._7_patternUsage.GetChecksum
+import proginscala.chap_15._7_patternusage.GetChecksum
 
 val myTuple = (123, "abc")
 val (n, s) = myTuple
