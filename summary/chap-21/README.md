@@ -305,4 +305,80 @@
 
 ## 06. 맥락 바운드
 
+
+- 파라미터에 대해 implicit을 사용하는 경우, 컴파일러는 그 파라미터에 암시적 값을 제공하려고 시도하고 메소드 본문 안에서 사용가능한 implicit 값으로 사용한다.
+
+    ```scala
+    def maxList[T](elements: List[T])(implicit ordering: Ordering[T]): T =
+      elements match {
+        case List() => throw new IllegalArgumentException("empty list")
+        case List(x) => x
+        case x :: rest =>
+          val maxRest = maxList(rest)
+          if (ordering.gt(x, maxRest)) x
+          else maxRest
+      }
+    ```
+
+    - 위의 ordering 사용을 없앨 수 있다. 표준 라이브러리의 이 메소드를 사용하면.
+
+        ```scala
+        def implicitly[T](implicit t: T) = t
+        ```
+
+    - 컴파일러는 implicitly 메소드를 해당 객체를 가지고 호출하며, 그 메소드는 그 객체를 즉시 돌려준다.
+
+        ```scala
+        def maxList[T](elements: List[T])(implicit ordering: Ordering[T]): T =
+          elements match {
+            case List() => throw new IllegalArgumentException("empty list")
+            case List(x) => x
+            case x :: rest =>
+              val maxRest = maxList(rest)
+              if (**implicitly[Ordering[T]]**.gt(x, maxRest)) x
+              else maxRest
+          }
+        ```
+
+- 맥락 바운드(context bound)
+    - 스칼라는 파라미터의 이름을 없애고 메소드 헤더를 맥락 바운드를 사용해 더 짧게 작성할 수 있게 해준다.
+    - 맥락 바운드: [T : Ordering] 이라는 구문
+        - 일반적인 타입 파라미터 T 를 소개한다.
+        - 암시적 파라미터 Ordering[T] 를 추가한다.
+
+        ```scala
+        def maxList**[T: Ordering]**(elements: List[T]): T =
+          elements match {
+            case List() => throw new IllegalArgumentException("empty list")
+            case List(x) => x
+            case x :: rest =>
+              val maxRest = maxList(rest)
+              if (implicitly[Ordering[T]].gt(x, maxRest)) x
+              else maxRest
+          }
+        ```
+
+## 07. 여러 변환을 사용하는 경우
+
+
+- 가능한 변환 중 하나가 다른 하나보다 더 구체적이면, 컴파일러는 더 구체적인 것을 선택한다. (스칼라 2.8 ~)
+- 더 구체적 ?
+    - 전자의 인자 타입이 후자의 서브타입이다.
+    - 두 변환 모두 메소드인데, 전자를 둘러싼 클래스가 후자를 둘러싼 클래스를 확장한다.
+
+```scala
+object JennyFoo {
+  implicit def foo(a: String) = println("String 메소드라구~")
+  implicit def foo(a: Any) = println("Any 메소드라구~")
+}
+
+import JennyFoo._
+
+foo("나와라 foo 메소드!")
+foo(null)  // String 메소드라구~
+foo(1)  // Any 메소드라구~
+```
+
+## 08. 암시 디버깅
+
 https://www.notion.so/Chapter-21-15240b3d61214674a580107b52ca0140
