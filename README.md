@@ -23,9 +23,9 @@
 |    16   | 리스트                           | :white_check_mark: |
 |    17   | 컬렉션                           | :white_check_mark: |
 |    18   | 변경 가능한 객체                   | :white_check_mark: |
-|    19   | 타입 파라미터화                    |      |
-|    20   | 추상 멤버                        |      |
-|    21   | 암시적 변환과 암시적 파라미터         |      |
+|    19   | 타입 파라미터화                    | :white_check_mark: |
+|    20   | 추상 멤버                        | :white_check_mark: |
+|    21   | 암시적 변환과 암시적 파라미터         | :white_check_mark: |
 |    22   | 리스트 구현                       |      |
 |    23   | for 표현식 다시 보기               |      |
 |    24   | 컬렉션 자세히 들여다보기             |      |
