@@ -95,3 +95,13 @@ def maxListImpParm[T](elements: List[T])(implicit ordering: Ordering[T]): T =
 
 case class MyClass(a: Int)
 maxListImpParm(List(1, 2, 3))
+
+
+class Test {
+  private[this] var num = 1
+
+  def setNum(_num: Int) = {
+    num = _num
+  }
+}
+

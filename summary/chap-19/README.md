@@ -111,3 +111,27 @@ class Queue[+T] (private val leading: List[T], private val trailing: List[T]) {
 * **use-site variance(사용 위치 변성)**인 Java 와 달리 Scala 는 **declaration-site variance(선언 위치 변성)**
   * use-site variance 는 만약 사용자 쪽에서 잘못 사용하면, 중요한 인스턴스 메소드를 더 이상 사용할 수 없다
   * declaration-site variance 는 우리의 의도를 컴파일러에게 알려줄 수 있고, 컴파일러는 메소드가 실제로 사용 가능한지를 다시 한 번 확인해줄 수 있다
+
+## 19.8 Upper Bounds
+* Upper Bounds 의 사용 예로는, Ordered trait 가 mixed-in 된 객체를 정렬하는 함수를 예로 들 수 있다.
+* ```scala
+  def orderedMergeSort[T <: Ordered[T]](xs: List[T]): List[T] = {
+    def merge(xs: List[T], ys: List[T]): List[T] =
+      (xs, ys) match {
+        case (Nil, _) => ys
+        case (_, Nil) => xs
+        case (x :: xs1, y :: ys1) =>
+          if (x < y) x :: merge(xs1, ys)
+          else y :: merge(xs, ys1)
+      }
+    val n = xs.length / 2
+    if (n == 0) xs
+    else {
+      val (ys, zs) = xs splitAt n
+      merge(orderedMergeSort(ys), orderedMergeSort(zs))
+    }
+  } 
+  ```
+* type parameter T 가 Ordered[T] 의 subtype 이라는 것을 강제함으로써(T 의 Upper Bound 로서 Ordered[T] 를 설정), `<` method 를 사용할 수 있게 된다
+* 하지만 이 방법은 **Int**와 같이 Ordered[Int]를 mixin 하지 않은 기존의 타입에 대해서는 정렬을 수행할 수 없다는 단점이 존재
+* 이러한 문제는 **implicit parameter**와 **context bound** 를 사용하는, 보다 좋은 방식으로 해결할 수 있다
